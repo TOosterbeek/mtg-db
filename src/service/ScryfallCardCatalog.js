@@ -4,6 +4,7 @@ import { useState } from "react";
 
 
 // TODO: Refactor to use with service to fetch from the api
+// and switch to axios
 function useScryfallCardCatalog(cardsPerPage) {
     const [loading, setLoading] = useState(false);
     const [cards, setCards] = useState([]);
