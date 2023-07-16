@@ -1,7 +1,6 @@
 import { auth } from "@/firebase/app";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { redirect } from "next/dist/server/api-utils";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";

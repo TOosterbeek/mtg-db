@@ -1,5 +1,7 @@
-import { addDoc, arrayUnion, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { firestore } from "@/firebase/app";
+import { arrayUnion, doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { app } from "@/firebase/app";
+
+const firestore = getFirestore(app);
 
 async function savedCards(req, res) {
     if (req.method === 'GET') await handleGET(req, res);

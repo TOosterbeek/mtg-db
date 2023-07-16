@@ -1,8 +1,6 @@
 import CardCatalog from "@/component/CardCatalog";
 import { auth } from "@/firebase/app";
-import useResource from "@/hooks/useResource";
 import { getSavedCards } from "@/repository/CardRepository";
-import useScryfallCardCollection from "@/service/ScryfallCardCollection";
 import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";

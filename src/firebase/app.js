@@ -1,6 +1,5 @@
 const { getApps, initializeApp, getApp } = require("firebase/app");
 const { getAuth } = require("firebase/auth");
-const { getFirestore, collection } = require("firebase/firestore");
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,4 +13,4 @@ const firebaseConfig = {
 export const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+// export const firestore = getFirestore(app);
