@@ -1,28 +1,13 @@
-// const functions = require("firebase-functions");
-// const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
-// admin.initializeApp();
-// const db = admin.firestore();
+exports.updateCardNames = functions.pubsub.schedule('every 12 hours').onRun(async () => {
+    const cardNames = await axios.get('https://api.scryfall.com/catalog/card-names')
+        .then(res => res['data']['data']);
 
-// exports.createUser = functions.auth
-//     .user()
-//     .onCreate(async (user) => {
-//         /**
-//          * Cherry pick user data to only send
-//          * what we actually need to the client.
-//          */
-//         const newUser = {
-//             uid: user.uid,
-//         }
-
-//         db.collection('users').doc(user.uid).set(newUser)
-//     });
-
-// /**
-// * Delete user in Firestore on user account deletion through Firebase Auth.
-// */
-// export const deleteUserDocument = functions.auth
-//     .user()
-//     .onDelete(async (user) => {
-//         db.collection('users').doc(user.uid).delete()
-//     })
+    await axios.post(process.env.HOSTNAME + '/api/cards/update-card-names', cardNames).then(() => {
+        console.log('Update successful!');
+    }).catch(error => console.error(error));
+});
