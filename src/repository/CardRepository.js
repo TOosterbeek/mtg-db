@@ -1,8 +1,4 @@
 import axios from "axios";
-import path from 'path';
-
-import { createReadStream, existsSync } from "fs";
-import * as readline from "readline";
 
 export async function getSavedCards(user) {
     const savedCards =
@@ -29,33 +25,10 @@ export async function fetchAllCardNames() {
 }
 
 export async function getCardNamesInRange(start, end) {
-    const filePath = path.join(process.cwd(), 'card-names.json');
-    if (!existsSync(filePath)) {
-        await fetchAllCardNames();
-    }
-
-    const fileStream = createReadStream(filePath, 'card-names.json');
-    const reader = readline.createInterface(
-        {
-            input: fileStream,
-            crlfDelay: Infinity
+    return axios.get('/api/cards/get-alphabetically', {
+        params: {
+            start: start,
+            end: end
         }
-    );
-
-    const lines = [];
-    let lineCount = 0;
-    for await (const line of reader) {
-        if (lineCount < start) {
-            lineCount++;
-            continue;
-        }
-
-        lines.append(line);
-        lineCount++;
-
-
-        if (lineCount >= end) {
-            return lines;
-        }
-    }
+    });
 }

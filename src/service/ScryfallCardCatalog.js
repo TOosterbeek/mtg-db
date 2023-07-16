@@ -1,7 +1,7 @@
-const { useEffect, useRef } = require("react");
+const { useEffect } = require("react");
 
+import { getCardNamesInRange } from "@/repository/CardRepository";
 import { useState } from "react";
-
 
 // TODO: Refactor to use with service to fetch from the api
 // and switch to axios
@@ -11,31 +11,19 @@ function useScryfallCardCatalog(cardsPerPage) {
 
     const [page, setPage] = useState(1);
 
-    const names = useRef({});
-
     useEffect(() => {
         buildCards();
 
         async function buildCards() {
             setLoading(true);
 
-            await fetchNames();
+            const names = await getCardNamesInRange((page - 1) * cardsPerPage, (page * cardsPerPage))
+                .then(res => res['data']);
 
-            const identifiers = buildCardIdentifiersJSON();
+            const identifiers = buildCardIdentifiersJSON(names);
             const cards = await fetchCards(identifiers);
             setCards(current => [...current, ...cards['data']]);
             setLoading(false);
-        }
-
-        async function fetchNames() {
-            if (names.current.length) {
-                return;
-            }
-
-            return fetch('https://api.scryfall.com/catalog/card-names')
-                .then((response) => response.json())
-                .then((json) => names.current = json['data'])
-                .catch((error) => console.error(error));
         }
 
         async function fetchCards(requestData) {
@@ -51,11 +39,11 @@ function useScryfallCardCatalog(cardsPerPage) {
                 .catch((error) => console.error(error));
         }
 
-        function buildCardIdentifiersJSON() {
+        function buildCardIdentifiersJSON(names) {
             const identifiers = [];
 
             for (let i = 0; i < cardsPerPage; i++) {
-                identifiers.push({ name: names.current[i + ((page - 1) * cardsPerPage)] });
+                identifiers.push({ name: names[i + ((page - 1) * cardsPerPage)] });
             }
 
             return {
