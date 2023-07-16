@@ -6,4 +6,4 @@ const ResetPasswordPage = () => {
     )
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;

@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBarDrawerItems from './AppBarDrawerItems';
-import * as React from 'react';
 
 import { useState } from 'react';
 
@@ -13,7 +12,7 @@ const AppBarDrawer = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (
-        <React.Fragment>
+        <>
             <IconButton
                 size="large"
                 edge="start"
@@ -34,7 +33,7 @@ const AppBarDrawer = () => {
                     <AppBarDrawerItems />
                 </Box>
             </Drawer>
-        </React.Fragment>
+        </>
     )
 }
 

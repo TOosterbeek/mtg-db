@@ -3,7 +3,6 @@ import Star from "@mui/icons-material/Star";
 import { Box } from "@mui/material";
 
 import styles from './CardOverlay.module.scss';
-import { useState } from "react";
 
 const CardOverlay = ({ saved, onSave }) => {
 

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useEffect, useState, useMemo, useRef, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import Card from "./Card";
 import LoadingCard from "./LoadingCard";
 

@@ -1,6 +1,6 @@
 import { auth } from "@/firebase/app";
 import { FormControl } from "@mui/base";
-import { Button, FormLabel, Input, InputLabel, styled, Typography } from "@mui/material";
+import { Button, Input, InputLabel, styled, Typography } from "@mui/material";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 import { useState } from "react";
