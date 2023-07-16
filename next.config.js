@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'cards.scryfall.io',
+                port: '',
+                pathname: '/normal/**'
+            }
+        ]
+    }
+}
 
 module.exports = nextConfig
